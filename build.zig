@@ -28,8 +28,8 @@ pub fn build(b: *std.build.Builder) void {
     exe.setBuildMode(mode);
 
     if(exe.target.isWindows()){
-        exe.addCSourceFile("src/main.c", &[_][]const u8 {"-DSOKOL_GLCORE33", "-I", "src/sokol", "-I", "src/sokol-utils"});
-        exe.addCSourceFile("src/sokol-util/sokol.c", &[_][]const u8{});
+        exe.addCSourceFile("src/main.c", &[_][]const u8 {"-DSOKOL_GLCORE33", "-I", "src/sokol"});
+        exe.addCSourceFile("src/sokol.c", &[_][]const u8{});
 
         exe.linkSystemLibrary("kernel32");
         exe.linkSystemLibrary("user32");
@@ -39,8 +39,8 @@ pub fn build(b: *std.build.Builder) void {
         // exe.linkSystemLibrary("dxgi");
 
     }else if(exe.target.isDarwin()){
-        exe.addCSourceFile("src/main.c", &[_][]const u8 {"-DSOKOL_METAL", "-fobjc-arc", "-I", "src/sokol", "-I", "src/sokol-utils"});
-        exe.addCSourceFile("src/sokol-util/sokol.m", &[_][]const u8{});
+        exe.addCSourceFile("src/main.c", &[_][]const u8 {"-DSOKOL_METAL", "-fobjc-arc", "-I", "src/sokol"});
+        exe.addCSourceFile("src/sokol.m", &[_][]const u8{});
         exe.linkFramework("Foundation");
         exe.linkFramework("MetalKit");
         exe.linkFramework("Metal");

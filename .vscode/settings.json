@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "sokol_gfx.h": "c",
+        "sokol_gp.h": "c"
+    }
+}
