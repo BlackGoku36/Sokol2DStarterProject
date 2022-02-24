@@ -34,7 +34,7 @@ pub fn build(b: *std.build.Builder) void {
         exe.linkSystemLibrary("kernel32");
         exe.linkSystemLibrary("user32");
         exe.linkSystemLibrary("gdi32");
-        // exe.linkSystemLibrary("ole32");
+        exe.linkSystemLibrary("ole32");
         // exe.linkSystemLibrary("d3d11");
         // exe.linkSystemLibrary("dxgi");
 
