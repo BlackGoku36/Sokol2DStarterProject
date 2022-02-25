@@ -8,14 +8,14 @@ pub fn build(b: *std.build.Builder) void {
 
     const mode = b.standardReleaseOptions();
 
-    // const lib = b.addStaticLibrary("cimgui", null);
-    // lib.setBuildMode(mode);
-    // lib.addCSourceFile("cimgui/imgui/imgui.cpp", &[_][]const u8{""});
-    // lib.addCSourceFile("cimgui/imgui/imgui_widgets.cpp", &[_][]const u8{""});
-    // lib.addCSourceFile("cimgui/imgui/imgui_tables.cpp", &[_][]const u8{""});
-    // lib.addCSourceFile("cimgui/imgui/imgui_draw.cpp", &[_][]const u8{""});
-    // lib.addCSourceFile("cimgui/imgui/imgui_demo.cpp", &[_][]const u8{""});
-    // lib.addCSourceFile("cimgui/cimgui.cpp", &[_][]const u8{""});
+    const lib = b.addStaticLibrary("cimgui", null);
+    lib.setBuildMode(mode);
+    lib.addCSourceFile("src/cimgui/imgui/imgui.cpp", &[_][]const u8{""});
+    lib.addCSourceFile("src/cimgui/imgui/imgui_widgets.cpp", &[_][]const u8{""});
+    lib.addCSourceFile("src/cimgui/imgui/imgui_tables.cpp", &[_][]const u8{""});
+    lib.addCSourceFile("src/cimgui/imgui/imgui_draw.cpp", &[_][]const u8{""});
+    lib.addCSourceFile("src/cimgui/imgui/imgui_demo.cpp", &[_][]const u8{""});
+    lib.addCSourceFile("src/cimgui/cimgui.cpp", &[_][]const u8{""});
 
     // const compile_shader = b.addSystemCommand(&[_][]const u8{
     //     "../sokol-tools-bin/bin/osx/sokol-shdc",
@@ -50,6 +50,8 @@ pub fn build(b: *std.build.Builder) void {
     }
 
     exe.linkLibC();
+    exe.linkLibCpp();
+    exe.linkLibrary(lib);
 
     exe.install();
     b.step("run", "Runs the executable").dependOn(&exe.run().step);
