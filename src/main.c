@@ -15,14 +15,14 @@
 static void frame(void) {
     // Get current window size.
     int width = sapp_width(), height = sapp_height();
-    float ratio = width/(float)height;
+    float center_width = width/2;
+    float center_height = height/2;
 
     // Begin recording draw commands for a frame buffer of size (width, height).
     sgp_begin(width, height);
     // Set frame buffer drawing region to (0,0,width,height).
     sgp_viewport(0, 0, width, height);
     // Set drawing coordinate space to (left=-ratio, right=ratio, top=1, bottom=-1).
-    sgp_project(-ratio, ratio, 1.0f, -1.0f);
 
     // Clear the frame buffer.
     sgp_set_color(0.1f, 0.1f, 0.1f, 1.0f);
@@ -32,8 +32,8 @@ static void frame(void) {
     float time = sapp_frame_count() * sapp_frame_duration();
     float r = sinf(time)*0.5+0.5, g = cosf(time)*0.5+0.5;
     sgp_set_color(r, g, 0.3f, 1.0f);
-    sgp_rotate_at(time, 0.0f, 0.0f);
-    sgp_draw_filled_rect(-0.5f, -0.5f, 1.0f, 1.0f);
+    sgp_rotate_at(time, center_width, center_height);
+    sgp_draw_filled_rect(center_width-100.0f, center_height-100.0f, 200.0f, 200.0f);
 
     // Begin a render pass.
     sg_pass_action pass_action = {0};
