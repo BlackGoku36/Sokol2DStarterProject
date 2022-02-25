@@ -36,9 +36,12 @@ static void frame(void) {
     // Draw an animated rectangle that rotates and changes its colors.
     float time = sapp_frame_count() * sapp_frame_duration();
     float r = sinf(time)*0.5+0.5, g = cosf(time)*0.5+0.5;
+
     sgp_set_color(r, g, 0.3f, 1.0f);
+    sgp_push_transform();
     sgp_rotate_at(time, center_width, center_height);
     sgp_draw_filled_rect(center_width-100.0f, center_height-100.0f, 200.0f, 200.0f);
+    sgp_pop_transform();
 
     // Begin a render pass.
     sg_pass_action pass_action = {0};
